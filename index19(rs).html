@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laxmi | E-Commerce Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Modern Color Palette & Typography Variables */
+        :root {
+            --primary: #6c5ce7;
+            --primary-hover: #5b4bc4;
+            --secondary: #00cec9;
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Smooth Scrolling & Basic Resets */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Responsive Navigation Bar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        /* Reusable Section Layouts */
+        section {
+            padding: 6rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Hero Section (Flexbox Layout) */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            padding-top: 7rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h3 {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            line-height: 1.2;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Styled Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+        }
+
+        .hero-image-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-img-container {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            padding: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: var(--shadow);
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: var(--card-dark);
+        }
+
+        /* About Section */
+        .about-card {
+            background: var(--card-dark);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Project Showcase Section */
+        .project-card {
+            background: var(--card-dark);
+            border-radius: 12px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .project-header h3 {
+            font-size: 1.8rem;
+            color: var(--text-light);
+        }
+
+        .project-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .project-features li {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--secondary);
+            color: var(--text-light);
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .tag {
+            background: rgba(108, 92, 231, 0.2);
+            color: var(--secondary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Skills Section (CSS Grid) */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+        }
+
+        .skill-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            background: var(--card-dark);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-light);
+            outline: none;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile & Tablet Responsive Styles */
+        @media (max-width: 992px) {
+            #hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--card-dark);
+                flex-direction: column;
+                padding: 1.5rem 0;
+                gap: 1.5rem;
+                display: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .profile-img-container {
+                width: 240px;
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Responsive Navigation Bar -->
+    <header>
+        <nav>
+            <a href="#hero" class="logo">Laxmi<span>.dev</span></a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-list">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <button class="btn btn-outline" onclick="downloadWebsite()" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                        <i class="fa-solid fa-download"></i> Download Code
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <h3>Hello, I'm Laxmi 👋</h3>
+            <h1>Full-Stack Web Developer</h1>
+            <p>A BCA student specializing in full-stack application development, creating robust web platforms and interactive user interfaces.</p>
+            <div class="hero-buttons">
+                <a href="#project" class="btn btn-primary"><i class="fa-solid fa-laptop-code"></i> View Project</a>
+                <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Contact Me</a>
+            </div>
+        </div>
+        <div class="hero-image-wrapper">
+            <div class="profile-img-container">
+                <img src="https://via.placeholder.com/300" alt="Laxmi Profile Picture">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-card">
+            <p>I am a Computer Applications student passionate about software engineering, system architecture, and modern full-stack development. My technical journey combines solid academic principles in database management and algorithm design with hands-on practice building real-world dynamic web applications.</p>
+        </div>
+    </section>
+
+    <!-- Featured Project Section -->
+    <section id="project">
+        <h2 class="section-title">Featured Project</h2>
+        <div class="project-card">
+            <div class="project-header">
+                <h3><i class="fa-solid fa-cart-shopping" style="color: var(--secondary);"></i> Online E-Commerce Shopping Platform</h3>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">An end-to-end e-commerce solution designed for seamless product management, shopping cart operations, and user authentication.</p>
+            </div>
+            
+            <ul class="project-features">
+                <li><i class="fa-solid fa-user-check"></i> Registration & Authentication</li>
+                <li><i class="fa-solid fa-store"></i> Interactive Product Catalogue</li>
+                <li><i class="fa-solid fa-calculator"></i> Dynamic Cart Calculations</li>
+                <li><i class="fa-solid fa-credit-card"></i> Order Processing Interface</li>
+            </ul>
+
+            <div class="tech-tags">
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Python</span>
+                <span class="tag">Django</span>
+                <span class="tag">SQLite</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section (CSS Grid) -->
+    <section id="skills">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fa-brands fa-html5"></i>
+                <h4>Frontend Development</h4>
+                <p>HTML5, CSS3, JavaScript (ES6+), Responsive Layouts, Flexbox, Grid</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-code"></i>
+                <h4>Backend Programming</h4>
+                <p>Python, Django, C, C++, C#, VB.NET</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-database"></i>
+                <h4>Databases</h4>
+                <p>SQLite, DBMS Architecture & Query Optimization</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <h4>Development Tools</h4>
+                <p>VS Code, Git, GitHub, Replit, DOSBox Environment</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Let's Connect</h3>
+                <p>Feel free to reach out for collaborations, academic inquiries, or software development opportunities.</p>
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>laxmi@example.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>Bachelor of Computer Applications (BCA)</span>
+                </div>
+            </div>
+
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="4" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Laxmi. Designed with Responsive Flexbox & Grid CSS.</p>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu & Single-File Downloading -->
+    <script>
+        // Toggle Mobile Menu
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+
+        mobileMenu.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+
+        // Close mobile menu on click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+            });
+        });
+
+        // Instant Download function
+        function downloadWebsite() {
+            const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: "text/html" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "index.html";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
